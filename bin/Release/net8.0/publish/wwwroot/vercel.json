@@ -1,4 +1,11 @@
 {
+    
+  "builds": [
+    { "src": "bin/Release/net8.0/publish/wwwroot/**/*", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/index.html" }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/" }
   ],

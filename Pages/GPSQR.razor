@@ -1,0 +1,92 @@
+@page "/hello"
+
+<h1>Welcome to GPS</h1>
+<br>
+
+<h5>We need your location through GPS system. Please click "Agree" button below to allow the permission.</h5>
+<button class="location-btn" onclick="getLocation()">📍 Lấy vị trí hiện tại</button>
+
+<style>
+.location-btn {
+  background-color: #00aaff;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.location-btn:hover {
+  background-color: #008fcc;
+  transform: translateY(-2px);
+}
+
+.location-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+</style>
+
+
+
+<script>
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
+  enableHighAccuracy: true,
+  timeout: 10000,          // thời gian chờ tối đa 10 giây
+  maximumAge: 0
+});;
+  } else {
+    alert("Geolocation không được hỗ trợ trên trình duyệt này.");
+  }
+}
+
+function successCallback(position) {
+  var latitude = position.coords.latitude;
+  var longitude = position.coords.longitude;
+
+  // Gửi dữ liệu về server qua AJAX hoặc form
+  sendLocationToServer(latitude, longitude);
+}
+
+function errorCallback(error) {
+  switch(error.code) {
+    case error.PERMISSION_DENIED:
+      alert("Người dùng từ chối quyền định vị.");
+      break;
+    case error.POSITION_UNAVAILABLE:
+      alert("Vị trí không khả dụng.");
+      break;
+    case error.TIMEOUT:
+      alert("Lấy vị trí quá thời gian cho phép.");
+      break;
+    case error.UNKNOWN_ERROR:
+      alert("Lỗi không xác định xảy ra.");
+      break;
+  }
+}
+
+function sendLocationToServer(lat, lon) {
+  fetch('/Location/ReceiveLocation', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ latitude: lat, longitude: lon })
+  })
+  .then(response => response.text())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+}
+</script>
+
+@code{
+    private async Task GetCurrentLocation()
+    {
+
+    }
+}

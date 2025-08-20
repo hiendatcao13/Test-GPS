@@ -1044,3 +1044,7 @@ D:\test vscode\Blazor\GPS\GPS\obj\Debug\net8.0\compressed\2blldwp3zt.gz
 D:\test vscode\Blazor\GPS\GPS\obj\Debug\net8.0\compressed\ko0h9tc9ff.gz
 D:\test vscode\Blazor\GPS\GPS\obj\Debug\net8.0\compressed\4as4n9zpd3.gz
 D:\test vscode\Blazor\GPS\GPS\obj\Debug\net8.0\compressed\6c82jzyrdi.gz
+D:\test vscode\Blazor\GPS\GPS\bin\Debug\net8.0\publish\web.config
+D:\test vscode\Blazor\GPS\GPS\bin\Debug\net8.0\publish\wwwroot\sample-data\weather.json
+D:\test vscode\Blazor\GPS\GPS\bin\Debug\net8.0\publish\wwwroot\_framework\blazor.boot.json
+D:\test vscode\Blazor\GPS\GPS\obj\Debug\net8.0\GPS.sourcelink.json

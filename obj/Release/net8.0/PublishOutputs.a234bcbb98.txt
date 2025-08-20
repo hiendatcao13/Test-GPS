@@ -1,1 +1,4 @@
+D:\test vscode\Blazor\GPS\GPS\publish\publish\web.config
+D:\test vscode\Blazor\GPS\GPS\publish\publish\wwwroot\sample-data\weather.json
+D:\test vscode\Blazor\GPS\GPS\publish\publish\wwwroot\_framework\blazor.boot.json
 D:\test vscode\Blazor\GPS\GPS\publish\web.config

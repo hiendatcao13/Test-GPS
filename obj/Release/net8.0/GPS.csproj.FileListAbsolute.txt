@@ -1051,3 +1051,6 @@ D:\test vscode\Blazor\GPS\GPS\bin\Release\net8.0\publish\wwwroot\_framework\blaz
 D:\test vscode\Blazor\GPS\GPS\bin\Release\net8.0\publish\publish\wwwroot\sample-data\weather.json
 D:\test vscode\Blazor\GPS\GPS\bin\Release\net8.0\publish\publish\wwwroot\_framework\blazor.boot.json
 D:\test vscode\Blazor\GPS\GPS\bin\Release\net8.0\vercel.json
+D:\test vscode\Blazor\GPS\GPS\bin\Release\net8.0\publish\publish\publish\wwwroot\sample-data\weather.json
+D:\test vscode\Blazor\GPS\GPS\bin\Release\net8.0\publish\publish\publish\wwwroot\_framework\blazor.boot.json
+D:\test vscode\Blazor\GPS\GPS\bin\Release\net8.0\publish\vercel.json

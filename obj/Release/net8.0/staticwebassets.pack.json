@@ -41,6 +41,10 @@
       "PackagePath": "staticwebassets\\sample-data\\weather.json"
     },
     {
+      "Id": "D:\\test vscode\\Blazor\\GPS\\GPS\\wwwroot\\vercel.json",
+      "PackagePath": "staticwebassets\\vercel.json"
+    },
+    {
       "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.GPS.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

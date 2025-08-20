@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "W036j4Nvz6lS+NznP/rNiAU3Vv9Xp8L6Ko5tx3Eub4w=",
+  "Hash": "3xn+FILM4UE/0i7iVqo+2FZAVbefT2l3izp4JR9AO4Y=",
   "Source": "GPS",
   "BasePath": "/",
   "Mode": "Root",
@@ -2865,6 +2865,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\sample-data\\weather.json"
+    },
+    {
+      "Identity": "D:\\test vscode\\Blazor\\GPS\\GPS\\wwwroot\\vercel.json",
+      "SourceId": "GPS",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\test vscode\\Blazor\\GPS\\GPS\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "vercel.json",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\vercel.json"
     }
   ]
 }

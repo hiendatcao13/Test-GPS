@@ -1,0 +1,21 @@
+.location-btn[b-txb0ebsyet] {
+  background-color: #00aaff;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.location-btn:hover[b-txb0ebsyet] {
+  background-color: #008fcc;
+  transform: translateY(-2px);
+}
+
+.location-btn:active[b-txb0ebsyet] {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}

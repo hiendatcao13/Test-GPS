@@ -1,0 +1,31 @@
+<MudDialog Style="max-width: 500px; overflow: visible">
+    <DialogContent>
+    <MudText>
+        Requesting location access allows us to accurately determine your current position, helping us identify the nearest waste collection point without requiring you to enter your address manually. This not only saves time but also ensures that the pickup is scheduled at the right place, improving efficiency and reducing errors. Your location data is used solely for this purpose and is handled securely.
+    </MudText>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="Variant.Filled" Color="Color.Dark" OnClick="Cancel">Cancel</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Submit">OK</MudButton>
+    </DialogActions>
+</MudDialog>
+
+<style>
+	.my-custom-class {
+	backdrop-filter: blur(10px);
+	}
+
+	.title-text {
+	font-weight: bold;
+	}
+</style>
+@code {
+    [CascadingParameter]
+    private IMudDialogInstance MudDialog { get; set; } = default!;
+
+    private void Cancel() => MudDialog.Cancel();
+
+    
+    private void Submit() => MudDialog.Close(DialogResult.Ok(true));
+
+}

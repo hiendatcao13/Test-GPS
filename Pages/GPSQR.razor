@@ -1,94 +1,97 @@
-@page "/hello"
+@page "/gps"
+
+@using GPS.Pages.Dialog
+@inject ISnackbar Snackbar
+@inject IDialogService Dialog
 
 <h1>Welcome to GPS</h1>
 <br>
 
 <h5>We need your location through GPS system. Please click "Agree" button below to allow the permission.</h5>
-<button class="location-btn" onclick="getLocation()">📍 Lấy vị trí hiện tại</button>
+@* <button class="location-btn" onclick="getLocation()">📍 Lấy vị trí hiện tại</button> *@
+<MudButton Variant="Variant.Filled" Color="Color.Info" OnClick="OnClickRequestAsync">📍 Get current location</MudButton>
 
-<style>
-.location-btn {
-  background-color: #00aaff;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  font-size: 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
+@code {
+    [Inject]
+    private IJSRuntime Js { get; set; } = default!;
 
-.location-btn:hover {
-  background-color: #008fcc;
-  transform: translateY(-2px);
-}
+    string userOS = string.Empty;
 
-.location-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
-</style>
-
-
-
-<script>
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
-  enableHighAccuracy: true,
-  timeout: 10000,          // thời gian chờ tối đa 10 giây
-  maximumAge: 0
-});;
-  } else {
-    alert("Geolocation không được hỗ trợ trên trình duyệt này.");
-  }
-}
-
-function successCallback(position) {
-  var latitude = position.coords.latitude;
-  var longitude = position.coords.longitude;
-
-  // Gửi dữ liệu về server qua AJAX hoặc form
-  sendLocationToServer(latitude, longitude);
-}
-
-function errorCallback(error) {
-  switch(error.code) {
-    case error.PERMISSION_DENIED:
-      alert("Người dùng từ chối quyền định vị.");
-      break;
-    case error.POSITION_UNAVAILABLE:
-      alert("Vị trí không khả dụng.");
-      break;
-    case error.TIMEOUT:
-      alert("Lấy vị trí quá thời gian cho phép.");
-      break;
-    case error.UNKNOWN_ERROR:
-      alert("Lỗi không xác định xảy ra.");
-      break;
-  }
-}
-
-function sendLocationToServer(lat, lon) {
-  alert("Vị trí của bạn là: " + lat + ", " + lon);
-  // Gửi dữ liệu về server
-  fetch('/Location/ReceiveLocation', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ latitude: lat, longitude: lon })
-  })
-  .then(response => response.text())
-  .then(data => console.log(data))
-  .catch(error => console.error(error));
-}
-</script>
-
-@code{
-    private async Task GetCurrentLocation()
+    protected override async Task OnInitializedAsync()
     {
+        userOS = await DetectDevice();
+        await base.OnInitializedAsync();
+    }
 
+    private async Task GetCurrentLocationAsync()
+    {
+        await Js.InvokeVoidAsync("getLocation");
+    }
+
+    private async Task OnClickRequestAsync()
+    {
+        var result = await OpenRequestDialogAsync();
+        if (result != null && !result.Canceled)
+        {
+            await GetCurrentLocationAsync();
+        }
+    }
+
+    private async Task OnClickGuidAsync()
+    {
+        switch (userOS)
+        {
+            case "iOS":
+                var iosResult = await OpenIOSGuidDialogAsync();
+                if (iosResult != null && !iosResult.Canceled)
+                {
+                    await GetCurrentLocationAsync();
+                }
+                break;
+            case "Android":
+                var androidResult = await OpenAndroidGuidDialogAsync();
+                if (androidResult != null && !androidResult.Canceled)
+                {
+                    await GetCurrentLocationAsync();
+                }
+                break;
+            case "Windows":
+            case "Linux":
+            case "MacOS":
+                await GetCurrentLocationAsync();
+                break;
+            default:
+                Snackbar.Add("Unsupported OS", Severity.Error);
+                break;
+        }
+    }
+
+    private async Task<string> DetectDevice()
+    {
+        return await Js.InvokeAsync<string>("getUserOS");
+    }
+
+    private async Task<DialogResult?> OpenRequestDialogAsync()
+    {
+        var parameters = new DialogParameters<RequestGPS> { };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, BackgroundClass = "my-custom-class" };
+        var dialog = await Dialog.ShowAsync<RequestGPS>("REQUEST LOCATION", parameters, options);
+        return await dialog.Result;
+    }
+
+    private async Task<DialogResult?> OpenIOSGuidDialogAsync()
+    {
+        var parameters = new DialogParameters<IOSGuid> { };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, BackgroundClass = "my-custom-class" };
+        var dialog = await Dialog.ShowAsync<IOSGuid>("iOS GUID", parameters, options);
+        return await dialog.Result;
+    }
+
+    private async Task<DialogResult?> OpenAndroidGuidDialogAsync()
+    {
+        var parameters = new DialogParameters<AndroidGuid> { };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, BackgroundClass = "my-custom-class" };
+        var dialog = await Dialog.ShowAsync<AndroidGuid>("iOS GUID", parameters, options);
+        return await dialog.Result;
     }
 }

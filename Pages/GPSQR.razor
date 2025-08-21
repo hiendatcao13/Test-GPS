@@ -71,6 +71,8 @@ function errorCallback(error) {
 }
 
 function sendLocationToServer(lat, lon) {
+  alert("Vị trí của bạn là: " + lat + ", " + lon);
+  // Gửi dữ liệu về server
   fetch('/Location/ReceiveLocation', {
     method: 'POST',
     headers: {
